@@ -9,6 +9,11 @@
   "scripts": {
     "build": "yarn workspace ogateway build",
     "dev": "yarn workspace ogateway dev",
-    "example": "yarn workspace og-collect-example dev"
+    "example": "yarn workspace og-collect-example dev",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.8.1"
   }
 }
