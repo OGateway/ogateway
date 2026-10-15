@@ -1,0 +1,14 @@
+{
+  "name": "og-collect",
+  "private": true,
+  "version": "0.0.0",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "build": "yarn workspace ogateway build",
+    "dev": "yarn workspace ogateway dev",
+    "example": "yarn workspace og-collect-example dev"
+  }
+}
