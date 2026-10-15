@@ -31,11 +31,7 @@ async function post<T>(url: string, publicKey: string, body: unknown): Promise<T
   });
   const data = await parseBody(res);
   if (!res.ok) {
-    throw new OGatewayApiError(
-      data?.message || data?.error || `Request failed with status ${res.status}`,
-      res.status,
-      data,
-    );
+    throw new OGatewayApiError(data?.message || data?.error || `Request failed with status ${res.status}`, res.status, data);
   }
   return data as T;
 }
@@ -51,18 +47,14 @@ export function createClient(apiBaseUrl: string, publicKey: string): OGatewayCli
   const base = apiBaseUrl.replace(/\/$/, '');
 
   return {
-    initiateMomo: (body) => post<Transaction>(`${base}/collections/mobilemoney`, publicKey, body),
+    initiateMomo: body => post<Transaction>(`${base}/collections/mobilemoney`, publicKey, body),
     submitOtp: (id, otp) => post<Transaction>(`${base}/collections/otp`, publicKey, { id, otp }),
-    resendOtp: (id) => post<Transaction>(`${base}/collections/otp/resend`, publicKey, { id }),
-    verify: async (id) => {
+    resendOtp: id => post<Transaction>(`${base}/collections/otp/resend`, publicKey, { id }),
+    verify: async id => {
       const res = await fetch(`${base}/transactions/verify/${id}`);
       const data = await parseBody(res);
       if (!res.ok) {
-        throw new OGatewayApiError(
-          data?.message || data?.error || `Verify failed with status ${res.status}`,
-          res.status,
-          data,
-        );
+        throw new OGatewayApiError(data?.message || data?.error || `Verify failed with status ${res.status}`, res.status, data);
       }
       return data as VerifyResponse;
     },

@@ -1,0 +1,27 @@
+/*
+ * Deliberately NOT `@import "tailwindcss";` — that pulls in Preflight, Tailwind's
+ * global base reset (resets every <button>/<h1>/<input> on the page). This file
+ * ships inside merchants' own sites, so it only imports theme + utilities and
+ * never touches elements outside the og-collect component tree.
+ */
+@import 'tailwindcss/theme' layer(theme);
+@import 'tailwindcss/utilities' layer(utilities);
+
+@theme {
+  --color-og-primary: #00cc60;
+  --color-og-primary-foreground: #003a39;
+  --color-og-secondary: #003a39;
+  --color-og-bg: #ffffff;
+  --color-og-muted: #f6f6f6;
+  --color-og-muted-foreground: #555555;
+  --color-og-border: #e3e6e5;
+  --color-og-placeholder: #838383;
+  --color-og-destructive: #dc2626;
+  --color-og-destructive-soft: #fef2f2;
+
+  --radius-og-lg: 0.625rem;
+  --radius-og-xl: 1rem;
+  --radius-og-2xl: 1.25rem;
+
+  --font-og-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}

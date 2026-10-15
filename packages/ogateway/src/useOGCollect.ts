@@ -20,14 +20,7 @@ function genReference(): string {
 }
 
 export function useOGCollect(options: UseOGCollectOptions) {
-  const {
-    publicKey,
-    apiBaseUrl,
-    pollIntervalMs = 3000,
-    pollTimeoutMs = 120_000,
-    onSuccess,
-    onFailed,
-  } = options;
+  const { publicKey, apiBaseUrl, pollIntervalMs = 3000, pollTimeoutMs = 120_000, onSuccess, onFailed } = options;
 
   const client = useRef(createClient(apiBaseUrl, publicKey)).current;
   const [state, setState] = useState<CollectState>({ stage: 'idle', transaction: null, error: null });
@@ -78,7 +71,7 @@ export function useOGCollect(options: UseOGCollectOptions) {
             return;
           }
           const message = err instanceof Error ? err.message : 'Failed to check transaction status';
-          setState((prev) => ({ ...prev, stage: 'failed', error: message }));
+          setState(prev => ({ ...prev, stage: 'failed', error: message }));
           onFailed?.(null, message);
         }
       };
@@ -120,7 +113,7 @@ export function useOGCollect(options: UseOGCollectOptions) {
       const id = state.transaction?.id;
       if (!id) throw new Error('No pending transaction to verify an OTP for');
 
-      setState((prev) => ({ ...prev, stage: 'verifying_otp', error: null }));
+      setState(prev => ({ ...prev, stage: 'verifying_otp', error: null }));
       try {
         const transaction = await client.submitOtp(id, otp);
         setState({ stage: 'polling', transaction, error: null });
@@ -128,7 +121,7 @@ export function useOGCollect(options: UseOGCollectOptions) {
         return transaction;
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Failed to verify OTP';
-        setState((prev) => ({ ...prev, stage: 'otp_required', error: message }));
+        setState(prev => ({ ...prev, stage: 'otp_required', error: message }));
         throw err;
       }
     },
