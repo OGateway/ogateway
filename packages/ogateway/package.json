@@ -1,6 +1,6 @@
 {
   "name": "ogateway",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Drop-in React component and hook for collecting mobile money payments through OGateway.",
   "license": "MIT",
   "author": "OGateway",
@@ -34,7 +34,7 @@
   ],
   "scripts": {
     "build": "tsup && npm run build:css",
-    "build:css": "tailwindcss -i ./src/styles.css -o ./dist/style.css --minify",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./dist/style.css --minify && node ./scripts/strip-layers.mjs ./dist/style.css",
     "dev": "tsup --watch"
   },
   "peerDependencies": {
