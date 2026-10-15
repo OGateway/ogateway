@@ -1,13 +1,6 @@
-// Mirrors og-api's TrxStatus enum (prisma/schema.prisma) and the Currencies
-// og-api currently allows for momo collections.
-export type TrxStatus =
-  | 'INITIATED'
-  | 'FAILED'
-  | 'COMPLETED'
-  | 'CANCELLED'
-  | 'OTP'
-  | 'RECONCILE'
-  | 'REVERSED';
+// Mirrors the OGateway API's transaction status values and the currencies
+// it currently allows for momo collections.
+export type TrxStatus = 'INITIATED' | 'FAILED' | 'COMPLETED' | 'CANCELLED' | 'OTP' | 'RECONCILE' | 'REVERSED';
 
 export type Currency = 'GHS' | 'XOF' | 'XAF' | 'KES' | 'UGX' | 'TZS' | 'ZMW';
 
@@ -23,8 +16,9 @@ export interface MomoCollectionRequest {
   email?: string;
 }
 
-// The shape of og-api's own Transactions row, as returned flat (not wrapped)
-// by POST /collections/mobilemoney, /collections/otp and /collections/otp/resend.
+// The shape of the OGateway API's transaction record, as returned flat
+// (not wrapped) by POST /collections/mobilemoney, /collections/otp and
+// /collections/otp/resend.
 export interface Transaction {
   id: string;
   status: TrxStatus;
@@ -42,14 +36,7 @@ export interface VerifyResponse {
   payment: Transaction;
 }
 
-export type CollectStage =
-  | 'idle'
-  | 'submitting'
-  | 'otp_required'
-  | 'verifying_otp'
-  | 'polling'
-  | 'success'
-  | 'failed';
+export type CollectStage = 'idle' | 'submitting' | 'otp_required' | 'verifying_otp' | 'polling' | 'success' | 'failed';
 
 export interface CollectState {
   stage: CollectStage;
