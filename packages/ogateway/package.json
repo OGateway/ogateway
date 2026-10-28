@@ -1,6 +1,6 @@
 {
   "name": "ogateway",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Drop-in React component and hook for collecting mobile money payments through OGateway.",
   "license": "MIT",
   "author": "OGateway",
