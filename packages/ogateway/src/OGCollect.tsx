@@ -146,6 +146,11 @@ export function OGCollect(props: OGCollectProps) {
             className="og-resend box-border text-sm font-medium text-og-primary disabled:text-og-muted-foreground disabled:cursor-not-allowed">
             {resendIn > 0 ? `Resend code in ${resendIn}s` : 'Resend code'}
           </button>
+          {currency === 'GHS' && (
+            <div className="text-center text-xs text-og-muted-foreground">
+              Didn't get the SMS? Dial <span className="font-medium text-og-secondary">*928*01#</span> on {accountNumber} to see your code.
+            </div>
+          )}
         </form>
       )}
 
